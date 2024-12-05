@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+
+        }
+        code {
+            display: block;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>MongoDB Queries</h1>
+    <h2>Name:Pranjal Pandey</h2>
+    <h3>Enrollment no:2203031080144</h3>
+
+
+   query 1
+    <code>
+   db.movies.find({runtime:{$gt:150}})
+   db.movies.find({rating:{$gt:8.5}})
+   db.movies.find({$and:[{year:{$gt:2000,$lt:2015}}]})
+    </code>
+    <br>
+
+    query 2
+    <code>
+      db.movies.find({
+      director: "Christopher Nolan", 
+      isOscarWinner: true, 
+      boxOffice: { $gt: 700 }, 
+      streamingOn: "Netflix"
+   })
+    </code>
+    <br>
+
+    query 3
+    
+    <code>
+    db.movies.find({
+      "specialFeatures.behindTheScenes": true, 
+      "specialFeatures.deletedScenes": true
+   })
+    </code>
+    <br>
+    query 4
+    
+    <code>
+    db.movies.find({
+      $or: [ 
+          { cast: "Carrie-Anne Moss" }, 
+          { cast: "Morgan Freeman" }
+      ],
+      languages: { $exists: true },
+      "streamingOn.1": { $exists: true }
+   })
+    </code>
+    <br>
+    query 5
+    
+    <code>
+    db.movies.updateOne(
+       { title: "Inception" }, 
+       { $set: { languages: "Chinese" } }
+   )
+    </code>
+    <br>
+    query 6
+    
+    <code>
+    db.movies.updateMany(
+       { director: "Christopher Nolan" }, 
+       { $set: { cast: "Michael Caine" } }
+   )
+    </code>
+    <br>
+    query 7
+    
+    <code>
+    db.movies.updateMany(
+       { runtime: { $gt: 140 } }, 
+       { $set: { streamingOn: "Disney+" } }
+   )
+    </code>
+    <br>
+    query 8
+    
+    <code>
+    db.movies.find({
+       genre: { $size: 2 }, 
+       boxOffice: { $exists: true },
+       specialFeatures: { $exists: false }
+   })
+    </code>
+    <br>
+    query 9
+    
+    <code>
+    db.movies.deleteMany({ rating: { $lt: 8.0 } });
+    </code>
+    <br>
+    query 10
+    <code>
+    db.movies.updateMany(
+        { year: { $lt: 2000 } }, 
+        { $pull: { streamingOn: "Netflix" } }
+    );
+    </code>
+
+    query 11
+    
+    <code>
+    db.movies.find({
+        $expr: { $gt: ["$boxOffice", { $multiply: ["$runtime", 10] }] }
+    });
+    </code>
+    <br>
+    query 13
+    
+    <code>
+    db.movies.find({ genre: { $all: ["Action", "Sci-Fi"] } });
+    </code>
+    <br>
+    query 14
+    
+    <code>
+    db.movies.find({ "genre.0": "Action" });
+    </code>
+    <br>
+    query 15
+    <code>
+    db.movies.find({ cast: { $size: 3 } });
+    </code>
+
+<h3>Progress: 13/15</h3>
+<div style="width: 300px; border: 1px solid #000;">
+<div style="width: 86.67%; background-color: #4caf50; height: 20px;"></div>
+</div>
+<h4>86.67%</h4>
+</body>
+</html>
